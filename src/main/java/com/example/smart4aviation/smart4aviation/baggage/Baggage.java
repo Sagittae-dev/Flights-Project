@@ -1,13 +1,12 @@
-package com.example.smart4aviation.smart4aviation.cargo;
+package com.example.smart4aviation.smart4aviation.baggage;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.smart4aviation.smart4aviation.cargo.AbstractCargoBaggage;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Data
 @Table
 @Entity
 @DiscriminatorValue("childClasss")
@@ -15,7 +14,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Baggage extends AbstractCargoBaggage{
+@ToString
+public class Baggage extends AbstractCargoBaggage {
     @Id
     @GeneratedValue
     private int baggageId;

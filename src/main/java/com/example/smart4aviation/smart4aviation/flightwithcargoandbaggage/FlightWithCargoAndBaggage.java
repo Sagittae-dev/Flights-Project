@@ -1,5 +1,7 @@
-package com.example.smart4aviation.smart4aviation.cargo;
+package com.example.smart4aviation.smart4aviation.flightwithcargoandbaggage;
 
+import com.example.smart4aviation.smart4aviation.baggage.Baggage;
+import com.example.smart4aviation.smart4aviation.cargo.Cargo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import java.util.List;
 public class FlightWithCargoAndBaggage {
     @OneToMany(targetEntity = Cargo.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "fc_fk", referencedColumnName = "flightId")
-    private List<Cargo> cargoList;
+    private List<Cargo> cargo;
 
     @Id
     @GeneratedValue
@@ -23,5 +25,5 @@ public class FlightWithCargoAndBaggage {
 
     @OneToMany(targetEntity = Baggage.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "fb_fk", referencedColumnName = "flightId")
-    private List<Baggage> baggageList;
+    private List<Baggage> baggage;
 }

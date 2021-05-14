@@ -1,11 +1,9 @@
 package com.example.smart4aviation.smart4aviation.flightmodel;
 
-import com.example.smart4aviation.smart4aviation.cargo.FlightWithCargoAndBaggage;
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Table
 @Entity

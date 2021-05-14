@@ -1,12 +1,10 @@
 package com.example.smart4aviation.smart4aviation.cargo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Data
 @Table
 @Entity
 @DiscriminatorValue("childClasss")
@@ -14,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Cargo extends AbstractCargoBaggage{
     @Id
     @GeneratedValue
