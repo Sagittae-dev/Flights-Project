@@ -2,27 +2,14 @@ package com.example.smart4aviation.smart4aviation.flight;
 
 import com.example.smart4aviation.smart4aviation.flightmodel.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
-public class FlightService implements ParsingService {
+public class FlightService {
 
     private final FlightRepository flightRepository;
-
-    /*@Value("${url.flights}")
-    private String urlToFlights;*/
-
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Bean
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
 
     @Autowired
     public FlightService(FlightRepository flightRepository) {
@@ -31,11 +18,6 @@ public class FlightService implements ParsingService {
 
     public List<Flight> getFlightList(){
         return flightRepository.findAll();
-    }
-
-    @Override
-    public Object parse(String url) {
-        return restTemplate.getForObject(url, Object.class);
     }
 
     public void addNewFlight(Flight flight) {
