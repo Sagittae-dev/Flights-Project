@@ -37,6 +37,10 @@ public class FlightWithCargoAndBaggageService {
         flightWithCargoAndBaggageRepository.save(flightWithCargoAndBaggage);
     }
 
+    public void addFlightWithCargoAndBaggages(List<FlightWithCargoAndBaggage> flightWithCargoAndBaggages) {
+        flightWithCargoAndBaggageRepository.saveAll(flightWithCargoAndBaggages);
+    }
+
     public Optional<FlightWithCargoAndBaggage> getCargoAndBaggageByFlightNumber(Integer number) {
         Optional<Flight> flightWithNumber = flightRepository.findAll().stream().filter(flight -> flight.getFlightNumber() == number).findAny();
         Optional<FlightWithCargoAndBaggage> flightWithCB = Optional.empty();

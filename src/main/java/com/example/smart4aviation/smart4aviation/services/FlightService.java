@@ -1,6 +1,6 @@
 package com.example.smart4aviation.smart4aviation.services;
 
-import com.example.smart4aviation.smart4aviation.dto.AirportFlightsDetailsDTO;
+import com.example.smart4aviation.smart4aviation.dto.AirportDetailsDTO;
 import com.example.smart4aviation.smart4aviation.models.Baggage;
 import com.example.smart4aviation.smart4aviation.models.Flight;
 import com.example.smart4aviation.smart4aviation.models.FlightWithCargoAndBaggage;
@@ -32,15 +32,18 @@ public class FlightService {
         flightRepository.save(flight);
     }
 
-    public AirportFlightsDetailsDTO findFlightDetailsByIata(String arrivalAirportIATACode) {
-        List<Flight> listOfArrives = flightRepository.findByarrivalAirportIATACode(arrivalAirportIATACode);
+    public void addListOfFlights(List<Flight> list){
+        flightRepository.saveAll(list);
+    }
+
+    public AirportDetailsDTO findFlightDetailsByIata(String arrivalAirportIATACode, String departureDate) {
+        List<Flight> listOfArrives = flightRepository.findByarrivalAirportIATACodeAndDepartureDate(arrivalAirportIATACode, departureDate);
         int numberOfFlightsArriving = listOfArrives.size();
-        List<Flight> listOfDepartures = flightRepository.findBydepartureAirportIATACode(arrivalAirportIATACode);
+        List<Flight> listOfDepartures = flightRepository.findBydepartureAirportIATACodeAndDepartureDate(arrivalAirportIATACode, departureDate);
         int numberOfFlightsDeparting = listOfDepartures.size();
         int piecesOfBaggageArriving = getBaggagePiecesCount(listOfArrives);
         int piecesOfBaggageDeparting = getBaggagePiecesCount(listOfDepartures);
-        AirportFlightsDetailsDTO airportFlightsDetailsDTO = new AirportFlightsDetailsDTO(numberOfFlightsArriving, numberOfFlightsDeparting, piecesOfBaggageArriving, piecesOfBaggageDeparting);
-    return airportFlightsDetailsDTO;
+        return new AirportDetailsDTO(numberOfFlightsArriving, numberOfFlightsDeparting, piecesOfBaggageArriving, piecesOfBaggageDeparting);
     }
 
     private int getBaggagePiecesCount(List<Flight> listOfArrives) {
@@ -55,6 +58,4 @@ public class FlightService {
         }
         return allPieces;
     }
-
-
 }

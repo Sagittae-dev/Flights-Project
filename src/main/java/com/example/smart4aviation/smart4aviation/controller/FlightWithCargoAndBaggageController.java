@@ -39,4 +39,10 @@ public class FlightWithCargoAndBaggageController {
     public void addFlightWithCargoAndBaggage(@RequestBody FlightWithCargoAndBaggage flightWithCargoAndBaggage){
         flightWithCargoAndBaggageService.addFlightWithCargoAndBaggage(flightWithCargoAndBaggage);
     }
+
+    @PostMapping("/addAll")
+    public void addAllFlightsWithCargoAndBaggage(@RequestBody List<FlightWithCargoAndBaggage> flightWithCargoAndBaggages){
+        flightWithCargoAndBaggageService.addFlightWithCargoAndBaggages(flightWithCargoAndBaggages);
+    }
+
 }

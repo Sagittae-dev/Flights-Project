@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Integer> {
-    List<Flight> findByarrivalAirportIATACode(String arrivalAirportIATACode);
-    List<Flight> findBydepartureAirportIATACode(String departureAirportIATACode);
+    List<Flight> findByarrivalAirportIATACodeAndDepartureDate(String arrivalAirportIATACode, String departureDate);
+    List<Flight> findBydepartureAirportIATACodeAndDepartureDate(String departureAirportIATACode, String departureDate);
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AirportFlightsDetailsDTO {
+public class AirportDetailsDTO {
 
     int flightsArriving;
     int flightsDeparting;
