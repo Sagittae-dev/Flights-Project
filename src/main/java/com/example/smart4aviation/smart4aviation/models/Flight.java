@@ -1,4 +1,4 @@
-package com.example.smart4aviation.smart4aviation.flightmodel;
+package com.example.smart4aviation.smart4aviation.models;
 
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -18,7 +18,7 @@ public class Flight {
     private String departureDate;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull

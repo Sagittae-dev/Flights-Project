@@ -1,6 +1,7 @@
-package com.example.smart4aviation.smart4aviation.flight;
+package com.example.smart4aviation.smart4aviation.controller;
 
-import com.example.smart4aviation.smart4aviation.flightmodel.Flight;
+import com.example.smart4aviation.smart4aviation.models.Flight;
+import com.example.smart4aviation.smart4aviation.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

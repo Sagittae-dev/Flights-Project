@@ -1,9 +1,12 @@
-package com.example.smart4aviation.smart4aviation.flightwithcargoandbaggage;
+package com.example.smart4aviation.smart4aviation.controller;
 
+import com.example.smart4aviation.smart4aviation.models.FlightWithCargoAndBaggage;
+import com.example.smart4aviation.smart4aviation.services.FlightWithCargoAndBaggageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/flightsCB")
@@ -18,11 +21,16 @@ public class FlightWithCargoAndBaggageController {
 
     @GetMapping
     public List<FlightWithCargoAndBaggage> getFlightWithCargoAndBaggage(){
-        return flightWithCargoAndBaggageService.getFlightWithCargoAndBaggage();
+        return flightWithCargoAndBaggageService.getFlightsWithCargoAndBaggage();
+    }
+
+    @GetMapping(value = "{flightNumber}")
+    public Optional<FlightWithCargoAndBaggage> getFlightWithCargoAndBaggageByNumber(@PathVariable("flightNumber") Integer flightNumber){
+        return flightWithCargoAndBaggageService.getCargoAndBaggageByFlightNumber(flightNumber);
     }
 
     @PostMapping
-    public void addFlightWithCargoAndBaggage(FlightWithCargoAndBaggage flightWithCargoAndBaggage){
+    public void addFlightWithCargoAndBaggage(@RequestBody FlightWithCargoAndBaggage flightWithCargoAndBaggage){
         flightWithCargoAndBaggageService.addFlightWithCargoAndBaggage(flightWithCargoAndBaggage);
     }
 }
