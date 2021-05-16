@@ -1,12 +1,12 @@
 package com.example.smart4aviation.smart4aviation.controller;
 
+import com.example.smart4aviation.smart4aviation.dto.CargoAndWeightDetailsDTO;
 import com.example.smart4aviation.smart4aviation.models.FlightWithCargoAndBaggage;
 import com.example.smart4aviation.smart4aviation.services.FlightWithCargoAndBaggageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/flightsCB")
@@ -24,16 +24,10 @@ public class FlightWithCargoAndBaggageController {
         return flightWithCargoAndBaggageService.getFlightsWithCargoAndBaggage();
     }
 
-    @GetMapping(value = "{flightNumber}")
-    public Optional<FlightWithCargoAndBaggage> getFlightWithCargoAndBaggageByNumber(@PathVariable("flightNumber") Integer flightNumber){
-        return flightWithCargoAndBaggageService.getCargoAndBaggageByFlightNumber(flightNumber);
+    @GetMapping(value = "/weightFor{flightNumber}&{departureDate}")
+    public CargoAndWeightDetailsDTO getCargoWeightForFlightNumber(@PathVariable("flightNumber") Integer flightNumber, @PathVariable("departureDate")String departureDate){
+        return flightWithCargoAndBaggageService.getCargoAndBaggageByFlightNumberAndDate(flightNumber, departureDate);
     }
-
-    @GetMapping(value = "/weightFor{flightNumber}")
-    public Integer getCargoWeightForFlightNumber(@PathVariable("flightNumber") Integer flightNumber){
-        return flightWithCargoAndBaggageService.getCargoWeightForFlightNumber(flightNumber);
-    }
-
 
     @PostMapping
     public void addFlightWithCargoAndBaggage(@RequestBody FlightWithCargoAndBaggage flightWithCargoAndBaggage){

@@ -13,9 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 public class Baggage extends AbstractCargoBaggage {
-
     public Baggage(String weightUnit, Integer id, Integer weight, Integer pieces) {
         super(weightUnit, id, weight, pieces);
     }
-
 }

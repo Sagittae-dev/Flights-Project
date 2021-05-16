@@ -1,6 +1,8 @@
 package com.example.smart4aviation.smart4aviation.services;
 
+import com.example.smart4aviation.smart4aviation.dto.CargoAndWeightDetailsDTO;
 import com.example.smart4aviation.smart4aviation.models.Baggage;
+import com.example.smart4aviation.smart4aviation.models.Cargo;
 import com.example.smart4aviation.smart4aviation.models.Flight;
 import com.example.smart4aviation.smart4aviation.repositories.BaggageRepository;
 import com.example.smart4aviation.smart4aviation.repositories.CargoRepository;
@@ -41,22 +43,16 @@ public class FlightWithCargoAndBaggageService {
         flightWithCargoAndBaggageRepository.saveAll(flightWithCargoAndBaggages);
     }
 
-    public Optional<FlightWithCargoAndBaggage> getCargoAndBaggageByFlightNumber(Integer number) {
-        Optional<Flight> flightWithNumber = flightRepository.findAll().stream().filter(flight -> flight.getFlightNumber() == number).findAny();
-        Optional<FlightWithCargoAndBaggage> flightWithCB = Optional.empty();
-        if (flightWithNumber.isPresent()){
-            Flight flight = flightWithNumber.get();
-            int flightId = flight.getFlightId();
-            flightWithCB = flightWithCargoAndBaggageRepository.findById(flightId);
-        }
-        return flightWithCB;
-    }
-
-    public Integer getCargoWeightForFlightNumber(Integer flightNumber) {
-        Optional<FlightWithCargoAndBaggage> flightWithCargoAndBaggage = getCargoAndBaggageByFlightNumber(flightNumber);
-        if(flightWithCargoAndBaggage.isPresent()){
-            FlightWithCargoAndBaggage flightWithCB = flightWithCargoAndBaggage.get();
-            return flightWithCB.getBaggage().stream().map(Baggage::getWeight).reduce(Integer::sum).get();
+    public CargoAndWeightDetailsDTO getCargoAndBaggageByFlightNumberAndDate(Integer number, String departureDate) {
+        Optional<Flight> flightByNumberAndDate =
+                flightRepository.findByFlightNumberAndDepartureDate(number, departureDate);
+        if (flightByNumberAndDate.isPresent()) {
+            Flight flightByNrAndDate = flightByNumberAndDate.get();
+            FlightWithCargoAndBaggage flightWithCargoAndBaggage = flightWithCargoAndBaggageRepository.findById(flightByNrAndDate.getFlightId()).get();
+            int baggageTotatWeight = flightWithCargoAndBaggage.getBaggage().stream().map(Baggage::getWeight).reduce(Integer::sum).get();
+            int cargoTotalWeight = flightWithCargoAndBaggage.getCargo().stream().map(Cargo::getWeight).reduce(Integer::sum).get();
+            int totalWeight = baggageTotatWeight + cargoTotalWeight;
+            return new CargoAndWeightDetailsDTO(baggageTotatWeight, cargoTotalWeight, totalWeight);
         }
         return null;
     }
