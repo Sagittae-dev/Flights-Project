@@ -1,5 +1,6 @@
 package com.example.smart4aviation.smart4aviation.services;
 
+import com.example.smart4aviation.smart4aviation.models.Baggage;
 import com.example.smart4aviation.smart4aviation.models.Flight;
 import com.example.smart4aviation.smart4aviation.repositories.BaggageRepository;
 import com.example.smart4aviation.smart4aviation.repositories.CargoRepository;
@@ -41,9 +42,18 @@ public class FlightWithCargoAndBaggageService {
         Optional<FlightWithCargoAndBaggage> flightWithCB = Optional.empty();
         if (flightWithNumber.isPresent()){
             Flight flight = flightWithNumber.get();
-            int flightId = flight.getId();
+            int flightId = flight.getFlightId();
             flightWithCB = flightWithCargoAndBaggageRepository.findById(flightId);
         }
         return flightWithCB;
+    }
+
+    public Integer getCargoWeightForFlightNumber(Integer flightNumber) {
+        Optional<FlightWithCargoAndBaggage> flightWithCargoAndBaggage = getCargoAndBaggageByFlightNumber(flightNumber);
+        if(flightWithCargoAndBaggage.isPresent()){
+            FlightWithCargoAndBaggage flightWithCB = flightWithCargoAndBaggage.get();
+            return flightWithCB.getBaggage().stream().map(Baggage::getWeight).reduce(Integer::sum).get();
+        }
+        return null;
     }
 }

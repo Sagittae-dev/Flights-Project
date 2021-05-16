@@ -1,5 +1,6 @@
 package com.example.smart4aviation.smart4aviation.controller;
 
+import com.example.smart4aviation.smart4aviation.dto.AirportFlightsDetailsDTO;
 import com.example.smart4aviation.smart4aviation.models.Flight;
 import com.example.smart4aviation.smart4aviation.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class FlightController {
     }
 
     @GetMapping(value = "{arrivalAirportIATACode}")
-    public String getFlightByIata(@PathVariable("arrivalAirportIATACode") String arrivalAirportIATACode){
-        return flightService.findFlightbyIata(arrivalAirportIATACode);
+    public AirportFlightsDetailsDTO getFlightByIata(@PathVariable("arrivalAirportIATACode") String arrivalAirportIATACode){
+        return flightService.findFlightDetailsByIata(arrivalAirportIATACode);
     }
 
     @PostMapping

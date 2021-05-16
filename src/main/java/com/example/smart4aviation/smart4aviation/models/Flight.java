@@ -18,8 +18,7 @@ public class Flight {
     private String departureDate;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int flightId;
 
     @NotNull
     private String arrivalAirportIATACode;
@@ -29,9 +28,4 @@ public class Flight {
 
     @NotNull
     private String departureAirportIATACode;
-
-    /*@OneToMany(targetEntity = FlightWithCargoAndBaggage.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "fcb_fk", referencedColumnName = "id")
-    private List<FlightWithCargoAndBaggage> listOfCargoAndBaggage;*/
-
 }

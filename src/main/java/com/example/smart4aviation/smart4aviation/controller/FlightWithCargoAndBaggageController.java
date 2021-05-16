@@ -29,6 +29,12 @@ public class FlightWithCargoAndBaggageController {
         return flightWithCargoAndBaggageService.getCargoAndBaggageByFlightNumber(flightNumber);
     }
 
+    @GetMapping(value = "/weightFor{flightNumber}")
+    public Integer getCargoWeightForFlightNumber(@PathVariable("flightNumber") Integer flightNumber){
+        return flightWithCargoAndBaggageService.getCargoWeightForFlightNumber(flightNumber);
+    }
+
+
     @PostMapping
     public void addFlightWithCargoAndBaggage(@RequestBody FlightWithCargoAndBaggage flightWithCargoAndBaggage){
         flightWithCargoAndBaggageService.addFlightWithCargoAndBaggage(flightWithCargoAndBaggage);
